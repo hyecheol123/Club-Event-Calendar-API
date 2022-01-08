@@ -81,13 +81,13 @@ authRouter.post('/login', async (req, res, next) => {
       httpOnly: true,
       maxAge: 15 * 60,
       secure: true,
-      domain: 'api.calendar.busandev.com',
-      path: '/',
+      domain: req.app.get('serverDomain'),
+      path: req.app.get('serverPath'),
       sameSite: 'strict',
     };
     res.cookie('X-ACCESS-TOKEN', accessToken, cookieOption);
     cookieOption.maxAge = 120 * 60;
-    cookieOption.path = '/auth';
+    cookieOption.path = req.app.get('serverPath') + '/auth';
     res.cookie('X-REFRESH-TOKEN', refreshToken, cookieOption);
     res.status(200).send();
   } catch (e) {
@@ -153,15 +153,15 @@ authRouter.get('/renew', async (req, res, next) => {
       httpOnly: true,
       maxAge: 120 * 60,
       secure: true,
-      domain: 'api.calendar.busandev.com',
-      path: '/auth',
+      domain: req.app.get('serverDomain'),
+      path: req.app.get('serverPath') + '/auth',
       sameSite: 'strict',
     };
     if (refreshToken !== undefined) {
       res.cookie('X-REFRESH-TOKEN', refreshToken, cookieOption);
     }
     cookieOption.maxAge = 15 * 60;
-    cookieOption.path = '/';
+    cookieOption.path = req.app.get('serverPath');
     res.cookie('X-ACCESS-TOKEN', accessToken, cookieOption);
     res.status(200).send();
   } catch (e) {
@@ -238,8 +238,8 @@ authRouter.put('/password', async (req, res, next) => {
         httpOnly: true,
         maxAge: 120 * 60,
         secure: true,
-        domain: 'api.calendar.busandev.com',
-        path: '/auth',
+        domain: req.app.get('serverDomain'),
+        path: req.app.get('serverPath') + '/auth',
         sameSite: 'strict',
       };
       res.cookie('X-REFRESH-TOKEN', refreshToken, cookieOption);

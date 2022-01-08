@@ -7,17 +7,22 @@
  */
 
 import {BinaryLike} from 'crypto';
-import {ConfigObj, DbObj, JwtKeyObj} from './datatypes/ConfigObj';
+import {
+  ConfigObj,
+  DbObj,
+  JwtKeyObj,
+  ServerDomainPathObj,
+} from './datatypes/ConfigObj';
 
 /**
  * Module contains the configuration
  * Need to implement hash function
  */
 export default abstract class ServerConfigTemplate {
-  // DB Config
   readonly db: DbObj;
   readonly expressPort: number;
   readonly jwt: JwtKeyObj;
+  readonly domainPath: ServerDomainPathObj;
 
   /**
    * Constructor for ServerConfig Object
@@ -28,6 +33,7 @@ export default abstract class ServerConfigTemplate {
     this.db = config.db;
     this.expressPort = config.expressPort;
     this.jwt = config.jwtKeys;
+    this.domainPath = config.serverDomainPath;
   }
 
   /**

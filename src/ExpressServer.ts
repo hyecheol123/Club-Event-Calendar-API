@@ -37,6 +37,10 @@ export default class ExpressServer {
     this.app.set('jwtAccessKey', config.jwt.secretKey);
     this.app.set('jwtRefreshKey', config.jwt.refreshKey);
 
+    // API Server Domain and Path
+    this.app.set('serverDomain', config.domainPath.domain);
+    this.app.set('serverPath', config.domainPath.path);
+
     // Setup Parsers
     this.app.use(express.json());
     this.app.use(cookieParser());

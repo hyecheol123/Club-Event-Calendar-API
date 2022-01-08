@@ -33,6 +33,7 @@ export default class ServerConfig extends ServerConfigTemplate {
       },
       expressPort: 3000,
       jwtKeys: {secretKey: 'keySecret', refreshKey: 'keySecretRefresh'},
+      serverDomainPath: {domain: 'calendar.hcjang.com', path: '/api'},
     };
     super(config);
   }

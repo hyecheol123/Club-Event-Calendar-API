@@ -12,6 +12,7 @@ export interface ConfigObj {
   db: DbObj; // contain database configuration parameters
   expressPort: number; // indicate express server port
   jwtKeys: JwtKeyObj; // indicate jwt token credentials
+  serverDomainPath: ServerDomainPathObj; // indicate server's domain and path
 }
 
 /**
@@ -31,4 +32,13 @@ export interface DbObj {
 export interface JwtKeyObj {
   secretKey: string; // key that used to validate the token
   refreshKey: string; // different key that used to  validate refresh token
+}
+
+/**
+ * Interface to define server's domain and path
+ * This type of object should be contained in the ConfigObj.
+ */
+export interface ServerDomainPathObj {
+  domain: string; // API Server's Domain
+  path: string; // API Server's path
 }
